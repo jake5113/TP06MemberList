@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city">
+        <item>australia</item>
+        <item>belgium</item>
+        <item>canada</item>
+        <item>china</item>
+        <item>france</item>
+        <item>germany</item>
+        <item>ghana</item>
+        <item>italy</item>
+        <item>japan</item>
+        <item>korea</item>
+        <item>nepal</item>
+        <item>russia</item>
+        <item>usa</item>
+    </string-array>
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:columnCount="4"
+    android:rowCount="5">
+
+    <TextView
+        android:layout_row="0"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:text="NAME: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:text="GENDER: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:text="NATION: "
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_row="0"
+        android:layout_columnSpan="3"
+        android:layout_columnWeight="2"
+        android:inputType="textPersonName" />
+
+    <RadioGroup
+        android:id="@+id/rg_gender"
+        android:layout_column="1"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MALE" />
+
+        <RadioButton
+            android:id="@+id/rb_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:text="FEMALE" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="2"
+        android:layout_gravity="center|start"
+        android:entries="@array/city" />
+
+    <Button
+        android:id="@+id/btn_add_member"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_columnWeight="3"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="ADD MEMBER" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_columnWeight="3"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="CANCEL" />
+
+
+</GridLayout>
