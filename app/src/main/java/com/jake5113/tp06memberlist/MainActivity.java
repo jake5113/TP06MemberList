@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton rbMale, rbFemale;
     Spinner spinner;
     Button btnAdd, btnCancel;
+    String nation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.add){
+        if (item.getItemId() == R.id.add) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setView(R.layout.dialog);
             AlertDialog dialog = builder.create();
@@ -62,13 +65,30 @@ public class MainActivity extends AppCompatActivity {
             btnAdd = dialog.findViewById(R.id.btn_add_member);
             btnCancel = dialog.findViewById(R.id.btn_cancel);
 
-            String name = etName.getText().toString();
-
 
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // get name
+                    String name = etName.getText().toString();
+                    // get gender
+                    int id = rg.getCheckedRadioButtonId();
+                    RadioButton radioButton = dialog.findViewById(id);
+                    String gender = radioButton.getText().toString();
+                    //get nation
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String[] city = getResources().getStringArray(R.array.city);
+                            nation = city[position];
+                        }
 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {}
+                    });
+                    //TODO 여기서부터 수정해야함. get(0)이어서 계속 확인이 불가 & gender값이 null 임
+                    members.add(new Member(name, nation));
+                    Toast.makeText(MainActivity.this, members.get(0).name + members.get(0).nation, Toast.LENGTH_SHORT).show();
                 }
             });
 
