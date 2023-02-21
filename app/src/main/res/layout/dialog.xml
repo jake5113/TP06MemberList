@@ -44,6 +44,7 @@
             android:id="@+id/rb_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="male"
             android:text="MALE" />
 
         <RadioButton
@@ -51,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
+            android:tag="female"
             android:text="FEMALE" />
 
     </RadioGroup>
