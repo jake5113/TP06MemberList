@@ -73,36 +73,41 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = dialog.findViewById(R.id.btn_add_member);
         btnCancel = dialog.findViewById(R.id.btn_cancel);
 
+        //get nation
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] city = getResources().getStringArray(R.array.city);
+                nation = city[position];
+                imgNation = R.drawable.flag_australia + position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                String[] city = getResources().getStringArray(R.array.city);
+                nation = city[0];
+                imgNation = R.drawable.flag_australia;
+            }
+        });
+
+        // get gender
+        radioGroup = dialog.findViewById(R.id.rg_gender);
+        imgGender = R.drawable._male;
+        assert radioGroup != null;
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rbMale.isChecked()) imgGender = R.drawable._male;
+                else if (rbFemale.isChecked()) imgGender = R.drawable._female;
+            }
+        });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get name
                 String name = etName.getText().toString();
-
-                // get gender
-                radioGroup = dialog.findViewById(R.id.rg_gender);
-                // 미선택시 남자이미지 선택?
-                int genderId;
-                genderId = radioGroup.getCheckedRadioButtonId();
-                genderButton = findViewById(genderId);
-                if (genderButton == rbMale) imgGender = R.drawable._male;
-                else if (genderButton == rbFemale) imgGender = R.drawable._female;
-
-                //get nation
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        // TODO : 스피너 초기기본값 설정하기
-                        String[] city = getResources().getStringArray(R.array.city);
-                        nation = city[position];
-                        imgNation = R.drawable.flag_australia + position;
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
+                if (name.equals("")) name = "익명";
 
                 // 멤버 추가 및 리사이클러뷰에 표시
                 members.add(0, new Member(name, nation, imgGender, imgNation));
@@ -111,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // Dialog Cancel 버튼 클릭시
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
         return super.onOptionsItemSelected(item);
     }
 }
