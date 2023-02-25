@@ -3,7 +3,9 @@ package com.jake5113.tp06memberlist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.ThemeUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Member> members = new ArrayList<>();
     EditText etName;
     RadioGroup radioGroup;
-    RadioButton genderButton, rbMale, rbFemale;
+    RadioButton rbMale, rbFemale;
     Spinner spinner;
     Button btnAdd, btnCancel;
     String nation;
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 테마 설정
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new MyAdapter(MainActivity.this, members);
@@ -113,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 members.add(0, new Member(name, nation, imgGender, imgNation));
                 adapter.notifyItemInserted(0);
                 recyclerView.scrollToPosition(0);
+                if (!members.isEmpty()) findViewById(R.id.tv_data).setVisibility(View.GONE);
             }
         });
 

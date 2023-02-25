@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,15 +49,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
     }
 
 
-    class VH extends RecyclerView.ViewHolder{
+    class VH extends RecyclerView.ViewHolder {
         ImageView ivGender, ivNation;
         TextView tvName, tvNation;
+
         public VH(@NonNull View itemView) {
             super(itemView);
             ivGender = itemView.findViewById(R.id.iv_gender);
             ivNation = itemView.findViewById(R.id.iv_nation);
             tvNation = itemView.findViewById(R.id.tv_nation);
             tvName = itemView.findViewById(R.id.tv_name);
+
+            itemView.setOnLongClickListener(view -> {
+                //TODO : 롱클릭 이벤트 처리
+                int pos = getAdapterPosition();
+                members.remove(pos);
+                notifyItemRemoved(pos);
+                return true;
+            });
         }
     }
 }
