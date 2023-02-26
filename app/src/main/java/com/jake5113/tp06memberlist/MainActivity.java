@@ -5,11 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.ThemeUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,13 +19,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     SearchView searchView;
     ArrayList<Member> members = new ArrayList<>();
     EditText etName;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnAdd, btnCancel;
     String nation;
     int imgGender, imgNation;
-
     RecyclerView recyclerView;
     MyAdapter adapter;
 
@@ -49,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new MyAdapter(MainActivity.this, members);
         recyclerView.setAdapter(adapter);
+
+        // TODO : 롱클릭 컨텍스트 메뉴 만들기
+        registerForContextMenu(recyclerView);
+
+    }
+
+    @Override // TODO : 롱클릭 컨텍스트 메뉴 만들기
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.member_context, menu);
+
     }
 
     @Override
@@ -132,4 +142,5 @@ public class MainActivity extends AppCompatActivity {
         });
         return super.onOptionsItemSelected(item);
     }
+
 }
