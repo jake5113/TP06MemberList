@@ -1,14 +1,18 @@
 package com.jake5113.tp06memberlist;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -19,6 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
 
     Context context;
     ArrayList<Member> members;
+
 
     public MyAdapter(Context context, ArrayList<Member> members) {
         this.context = context;
@@ -43,6 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
         holder.ivNation.setImageResource(member.imgNation);
     }
 
+
     @Override
     public int getItemCount() {
         return members.size();
@@ -62,9 +68,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
 
             itemView.setOnLongClickListener(view -> {
                 //TODO : 롱클릭 이벤트 처리
-                int pos = getAdapterPosition();
-                members.remove(pos);
-                notifyItemRemoved(pos);
+                PopupMenu popupMenu = new PopupMenu(context, this.tvName);
+                //MenuInflater inflater = getMenuInflater();
+                //inflater.inflate(R.menu.popup_member, popupMenu.getMenu());
+
+                popupMenu.show();
+
+                // 멤버 삭제 및 알림
+//                members.remove(pos);
+//                notifyItemRemoved(pos);
                 return true;
             });
         }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -46,18 +47,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new MyAdapter(MainActivity.this, members);
         recyclerView.setAdapter(adapter);
-
-        // TODO : 롱클릭 컨텍스트 메뉴 만들기
-        registerForContextMenu(recyclerView);
-
-    }
-
-    @Override // TODO : 롱클릭 컨텍스트 메뉴 만들기
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.member_context, menu);
 
     }
 
