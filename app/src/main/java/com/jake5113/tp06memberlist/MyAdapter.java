@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -55,7 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
     }
 
 
-    class VH extends RecyclerView.ViewHolder {
+    class VH extends RecyclerView.ViewHolder implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
         ImageView ivGender, ivNation;
         TextView tvName, tvNation;
 
@@ -65,20 +66,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {
             ivNation = itemView.findViewById(R.id.iv_nation);
             tvNation = itemView.findViewById(R.id.tv_nation);
             tvName = itemView.findViewById(R.id.tv_name);
-
-            itemView.setOnLongClickListener(view -> {
-                //TODO : 롱클릭 이벤트 처리
-                PopupMenu popupMenu = new PopupMenu(context, this.tvName);
-                //MenuInflater inflater = getMenuInflater();
-                //inflater.inflate(R.menu.popup_member, popupMenu.getMenu());
-
-                popupMenu.show();
-
-                // 멤버 삭제 및 알림
-//                members.remove(pos);
-//                notifyItemRemoved(pos);
-                return true;
-            });
+        }
+        @Override
+        public boolean onLongClick(View view) {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+            popupMenu.inflate(R.menu.popup_member);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.show();
+            return true;
+        }
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()){
+                case
+            }
+            return false;
         }
     }
 }
